@@ -85,7 +85,7 @@ var editTask=function(){
     var editInput=listItem.querySelector("input[type=text]");
     var label=listItem.querySelector("label");
     var editBtn=listItem.querySelector(".edit-button");
-    var containsClass=listItem.classList.contains("incompleted-tasks__edit-mode");
+    var containsClass=listItem.classList.contains("todo-ul__il_edit-mode");
     //If class of the parent is .editmode
     if(containsClass){
 
@@ -99,7 +99,7 @@ var editTask=function(){
     }
 
     //toggle .editmode on the parent.
-    listItem.classList.toggle("incompleted-tasks__edit-mode");
+    listItem.classList.toggle("todo-ul__il_edit-mode");
 };
 
 
