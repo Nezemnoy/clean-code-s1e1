@@ -32,6 +32,8 @@ var createNewTaskElement=function(taskString){
     var deleteButton=document.createElement("button");//delete button
     var deleteButtonImg=document.createElement("img");//delete button image
 
+    listItem.className="todo-ul__il";
+
     label.innerText=taskString;
     label.className="task-label";
 
@@ -45,6 +47,7 @@ var createNewTaskElement=function(taskString){
 
     deleteButton.className="delete-button";
     deleteButtonImg.src="./remove.svg";
+    deleteButtonImg.className="button-pic";
     deleteButton.appendChild(deleteButtonImg);
 
 
@@ -85,21 +88,60 @@ var editTask=function(){
     var editInput=listItem.querySelector("input[type=text]");
     var label=listItem.querySelector("label");
     var editBtn=listItem.querySelector(".edit-button");
-    var containsClass=listItem.classList.contains("todo-ul__il_edit-mode");
+    var checkBox=listItem.querySelector("input[type=checkbox]");
+    var containsClassEditMode=listItem.classList.contains("todo-ul__il_edit-mode");
+    var containsClassCompleted=listItem.classList.contains("todo-ul__il_completed");
+
+  if (checkBox.checked) {
     //If class of the parent is .editmode
-    if(containsClass){
+    if(containsClassEditMode){
 
         //switch to .editmode
         //label becomes the inputs value.
+
         label.innerText=editInput.value;
         editBtn.innerText="Edit";
-    }else{
+        editInput.className="task-input";
+        label.className="task-label-completed";
+
+    }
+    else {
+
         editInput.value=label.innerText;
         editBtn.innerText="Save";
+        editInput.className="task-input_edit-mode";
+        label.className="task-label_edit-mode";
+
     }
+
+} else {
+//If class of the parent is .editmode
+if(containsClassEditMode){
+
+    //switch to .editmode
+    //label becomes the inputs value.
+
+    label.innerText=editInput.value;
+    editBtn.innerText="Edit";
+    editInput.className="task-input";
+    label.className="task-label";
+
+}
+else {
+
+    editInput.value=label.innerText;
+    editBtn.innerText="Save";
+    editInput.className="task-input_edit-mode";
+    label.className="task-label_edit-mode";
+
+}
+
+}
 
     //toggle .editmode on the parent.
     listItem.classList.toggle("todo-ul__il_edit-mode");
+    listItem.classList.add("todo-ul__il");
+
 };
 
 
@@ -118,9 +160,14 @@ var deleteTask=function(){
 //Mark task completed
 var taskCompleted=function(){
     console.log("Complete Task...");
-
-    //Append the task list item to the #completed-tasks
     var listItem=this.parentNode;
+    var containsClassEditMode=listItem.classList.contains("todo-ul__il_edit-mode");
+    //Append the task list item to the #completed-tasks
+    var label=listItem.querySelector("label");
+    // label.classList.add("task-label-completed");
+    if(!containsClassEditMode){
+    label.className="task-label-completed";
+    }
     completedTasksHolder.appendChild(listItem);
     bindTaskEvents(listItem, taskIncomplete);
 
@@ -129,10 +176,17 @@ var taskCompleted=function(){
 
 var taskIncomplete=function(){
     console.log("Incomplete Task...");
+
 //Mark task as incomplete.
     //When the checkbox is unchecked
     //Append the task list item to the #incompleteTasks.
     var listItem=this.parentNode;
+    var containsClassEditMode=listItem.classList.contains("todo-ul__il_edit-mode");
+    var label=listItem.querySelector("label");
+
+    if(!containsClassEditMode){
+        label.className="task-label";
+        }
     incompleteTaskHolder.appendChild(listItem);
     bindTaskEvents(listItem,taskCompleted);
 }
