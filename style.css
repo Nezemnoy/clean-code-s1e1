@@ -128,7 +128,7 @@
     margin: 0 0 20px;
   }
 
-  #new-item {
+  .item__input_active {
     width: 318px;
   }
 
