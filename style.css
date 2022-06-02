@@ -20,7 +20,7 @@
   font-family: fantasy, cursive;
 }
 
-@media (max-width:768px) {
+@media (max-width: 768px) {
 
   .matrix {
     text-align: center;
@@ -136,8 +136,7 @@ button {
 
 .todo-list__item,
 .todo-list__item_edit-mode,
-.todo-list__item_completed
- {
+.todo-list__item_completed {
   overflow: hidden;
   padding: 20px 0;
   border-bottom: 1px solid #eee;
